@@ -1,0 +1,33 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "discord bot to play music",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Jongtelles/discord-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "music"
+  ],
+  "author": "jongtelles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jongtelles/discord-bot/issues"
+  },
+  "homepage": "https://github.com/Jongtelles/discord-bot#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.3",
+    "babel-preset-env": "^1.7.0"
+  },
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
+}
