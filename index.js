@@ -1,21 +1,35 @@
+import fs from 'fs';
 import Discord from 'discord.js';
 import { prefix, token } from './config.json';
 
 const client = new Discord.Client();
+client.commands = new Discord.Collection();
+
+const commandFiles = fs.readdirSync('./commands');
+/* eslint-disable */
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
+}
+/* eslint-enable */
 
 client.on('ready', () => {
   console.log('Ready!');
 });
 
 client.on('message', (message) => {
-  if (message.content.startsWith(`${prefix}ping`)) {
-    message.channel.send('Pong.');
-  } else if (message.content.startsWith(`${prefix}beep`)) {
-    message.channel.send('Boop.');
-  } else if (message.content.startsWith(`${prefix}server`)) {
-    message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}\nServer Created: ${message.guild.createdAt}`);
-  } else if (message.content === `${prefix}user-info`) {
-    message.channel.send(`Your username: ${message.author.username}\nYour ID: ${message.author.id}`);
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+  const args = message.content.slice(prefix.length).split(/ +/);
+  const command = args.shift().toLowerCase();
+
+  if (!client.commands.has(command)) return;
+
+  try {
+    client.commands.get(command).execute(message, args);
+  } catch (error) {
+    console.log(error);
+    message.reply('There was an error trying to execute that command!');
   }
 });
 
