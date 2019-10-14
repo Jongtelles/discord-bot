@@ -24,7 +24,7 @@
   "homepage": "https://github.com/Jongtelles/discord-bot#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.3",
+    "babel-eslint": "^9.0.0",
     "babel-preset-env": "^1.7.0"
   },
   "dependencies": {
